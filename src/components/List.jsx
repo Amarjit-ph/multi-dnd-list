@@ -8,26 +8,51 @@ export default function List({column,tasks}) {
     // console.log(tasks)
 
     return (
-        <div>
-            <h2>{column.title}</h2>
+        <div className="border mb-2"
+        
+        style={{
+            width:'220px',
+            backgroundColor:'skyblue',
+
+            display:"flex",
+            flexDirection:"column"
+
+
+        }}
+
+        >
+            <h4>{column.title}</h4>
             {/* <p>{column.id}</p> */}
             
             <Droppable droppableId={column.id} type={column.id}>
-  {(provided, snapshot) => (
-    <div
-      ref={provided.innerRef}
-      {...provided.droppableProps}
-    >
-        {
-            tasks.map((t,i)=>{
-                return <Task key={t.id} task={t} index={i} />
-            })
-        }
-      
-      {provided.placeholder}
-    </div>
-  )}
-</Droppable>
+             {(provided, snapshot) => {
+                  
+
+                  return(
+                    <div
+
+                    style={{
+                        padding:'8px',
+                        flexGrow:1,
+                        minHeight:'300px'
+                    }}
+                
+                        ref={provided.innerRef}
+                        {...provided.droppableProps}>
+                        
+                         {
+                             tasks.map((t,i)=>{
+                             return <Task key={t.id} task={t} index={i} />
+                             })
+                         }
+          
+                    {provided.placeholder}
+                </div>
+                )
+             }
+             
+            }
+            </Droppable>
 
 
 

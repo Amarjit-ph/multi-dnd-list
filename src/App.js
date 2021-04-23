@@ -1,13 +1,16 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { DragDropContext} from "react-beautiful-dnd";
 
 import initialData from './initial-data'
-
 import List from './components/List'
 
 export default function App() {
 
   const [state,setState] = useState(initialData);
+
+  useEffect(()=>{
+    //console.log(state.columns["column-2"]);
+  })
 
   const onDragEnd = (result) => {
     const { destination, source,draggableId } = result;
@@ -26,6 +29,7 @@ export default function App() {
     }
 
     const column = state.columns[source.droppableId];
+    const columns = state.columns;
 
 
     console.log('COLUME NAME:',source.droppableId) //column-1
@@ -36,7 +40,7 @@ export default function App() {
     newTaskIds.splice(source.index,1);//Remove Source item
     newTaskIds.splice(destination.index,0,draggableId);//Add item to destination
 
-    console.log(newTaskIds);
+    //console.log(newTaskIds);
 
     const newColumn = {
       ...column,
@@ -46,10 +50,12 @@ export default function App() {
     const newState = {
       ...state,
       columns:{
-        ...column,
+        ...columns,
         [newColumn.id]:newColumn,
       },
     };
+
+    console.log('NEW STATE:',newState)
     setState(newState);
 
   }
@@ -57,6 +63,9 @@ export default function App() {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
+      <div className='container'
+      style={{display:'flex'}}
+      >
 
         {
           state.columnOrder.map(columnId => {
@@ -68,6 +77,8 @@ export default function App() {
             return <List key={column.id} column={column} tasks={tasks} />;
           })
         }
+
+</div>
     
 
       {/* <Droppable droppableId={state.columns}>
