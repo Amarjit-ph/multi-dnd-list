@@ -4,8 +4,10 @@ import {Droppable} from 'react-beautiful-dnd'
 
 
 export default function List({column,tasks}) {
-    // console.log(column)
+     console.log(column.id)
     // console.log(tasks)
+
+   
 
     return (
         <div className="border mb-2"
@@ -25,20 +27,14 @@ export default function List({column,tasks}) {
             {/* <p>{column.id}</p> */}
             
             <Droppable droppableId={column.id} type={column.id}>
-             {(provided, snapshot) => {
-                  
 
-                  return(
-                    <div
+             {(provided, snapshot) => 
 
-                    style={{
-                        padding:'8px',
-                        flexGrow:1,
-                        minHeight:'300px'
-                    }}
-                
-                        ref={provided.innerRef}
-                        {...provided.droppableProps}>
+                  (
+                    
+                    <div style={{ padding:'8px',flexGrow:1,minHeight:'300px' }}
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}>
                         
                          {
                              tasks.map((t,i)=>{
@@ -49,8 +45,7 @@ export default function List({column,tasks}) {
                     {provided.placeholder}
                 </div>
                 )
-             }
-             
+                
             }
             </Droppable>
 

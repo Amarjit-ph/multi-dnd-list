@@ -1,6 +1,6 @@
 const initialData = {
   tasks: {
-    't1': { id: 't1', content: 'Take out the garbage' },
+    't1': { id: 't1', content: 'Kill myself' },
     't2': { id: 't2', content: 'Watch News' },
     't3': { id: 't3', content: 'Charge my phone' },
     't4': { id: 't4', content: 'Cook dinner' },
@@ -11,12 +11,12 @@ const initialData = {
     'column-1': {
       id: 'column-1',
       title: 'To do',
-      taskIds: ['t1','t2','t3','t4','t5','t6'],
+      taskIds: ['t1','t2','t3'],
     },
     'column-2': {
       id: 'column-2',
       title: 'In Progress',
-      taskIds: [],
+      taskIds: ['t6'],
     },
     'column-3': {
       id: 'column-3',

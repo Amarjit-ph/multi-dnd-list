@@ -15,12 +15,12 @@ export default function App() {
   const onDragEnd = (result) => {
     const { destination, source,draggableId } = result;
 
-    // Check Destiation
+    //! 1 Check Destiation
     if(!destination){
       return;
     }
 
-    // Location Change check
+    //! 2 Change location check
     if (
       destination.droppableId === source.droppableId &&
       destination.index === source.index
@@ -29,34 +29,40 @@ export default function App() {
     }
 
     const column = state.columns[source.droppableId];
-    const columns = state.columns;
+    //const columns = state.columns;
 
 
-    console.log('COLUME NAME:',source.droppableId) //column-1
+    console.log('COLUME NAME:',source.droppableId)
     console.log('COLUMN STATE:',state);
 
+    const start = state.columns[source.droppableId]
+    const finish = state.columns[destination.droppableId]
 
-    const newTaskIds = Array.from(column.taskIds);// ['t1', 't2', 't3', 't4']
-    newTaskIds.splice(source.index,1);//Remove Source item
-    newTaskIds.splice(destination.index,0,draggableId);//Add item to destination
 
-    //console.log(newTaskIds);
+    if(start === finish){
+      const newTaskIds = Array.from(column.taskIds);// ['t1', 't2', 't3', 't4']
+      newTaskIds.splice(source.index,1);//Remove Source item
+      newTaskIds.splice(destination.index,0,draggableId);//Add item to destination
 
-    const newColumn = {
-      ...column,
-      taskIds:newTaskIds
-    };
+      const newColumn = {
+        ...column,
+        taskIds:newTaskIds
+      };
 
-    const newState = {
-      ...state,
-      columns:{
-        ...columns,
-        [newColumn.id]:newColumn,
-      },
-    };
+      const newState = {
+        ...state,
+        columns:{
+          ...state.columns,
+          [newColumn.id]:newColumn,
+        },
+      };
 
-    console.log('NEW STATE:',newState)
-    setState(newState);
+      console.log('NEW STATE:',newState)
+      setState(newState);
+      return;
+    }
+
+    
 
   }
 
@@ -66,7 +72,7 @@ export default function App() {
       <div className='container'
       style={{display:'flex'}}
       >
-
+        
         {
           state.columnOrder.map(columnId => {
             const column = state.columns[columnId]; // Column Object
