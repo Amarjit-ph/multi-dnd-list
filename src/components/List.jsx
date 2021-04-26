@@ -4,10 +4,7 @@ import {Droppable} from 'react-beautiful-dnd'
 
 
 export default function List({column,tasks}) {
-     console.log(column.id)
-    // console.log(tasks)
-
-   
+  
 
     return (
         <div className="border mb-2"
@@ -23,10 +20,10 @@ export default function List({column,tasks}) {
         }}
 
         >
-            <h4>{column.title}</h4>
+            <h3 className='text-white'>{column.title}</h3>
             {/* <p>{column.id}</p> */}
             
-            <Droppable droppableId={column.id} type={column.id}>
+            <Droppable droppableId={column.id} type='1'>
 
              {(provided, snapshot) => 
 
